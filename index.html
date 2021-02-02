@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Component Select</title>
+    <script src="components/select.js"></script>
+  </head>
+  <body>
+    <div>
+      <ivy-select id="test">
+        <ivy-option value="android">安卓</ivy-option>
+        <ivy-option value="ios">苹果</ivy-option>
+        <ivy-option value="window">windows</ivy-option>
+      </ivy-select>
+    </div>
+  </body>
+  <script>
+    const select = document.querySelector("#test");
+    select.addEventListener("change", (ev) => {
+      console.log(ev);
+    });
+  </script>
+</html>
