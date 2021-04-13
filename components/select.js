@@ -33,7 +33,9 @@ class Select extends HTMLElement {
                 display: none;
             }
         </style>
-        <input class="select-inner" readonly>
+        <input class="select-inner" readonly placeholder="${
+          this.placeholder || ""
+        }">
         <div class="drop">
             <slot></slot>
         </div>
@@ -74,11 +76,32 @@ class Select extends HTMLElement {
       this.dropEle.style.display = "none";
     };
   }
+  static get observedAttributes() {
+    return ["placeholder"];
+  }
+  set placeholder(val) {
+    if (val) {
+      this.setAttribute("placeholder", val);
+    } else {
+      this.removeAttribute("placeholder");
+    }
+  }
+  get placeholder() {
+    return this.getAttribute("placeholder");
+  }
   connectedCallback() {
+    console.log(1);
     document.addEventListener("click", this.BodyClick, true);
   }
   disconnectedCallback() {
+    console.log(2);
     document.removeEventListener("click", this.BodyClick);
+  }
+  attributeChangedCallback(attr, oldVal, val) {
+    console.log(attr, "--->", val);
+    if (attr === "placeholder") {
+      this.$input.setAttribute("placeholder", val || "");
+    }
   }
 }
 
